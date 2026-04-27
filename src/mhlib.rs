@@ -8,8 +8,8 @@ use crate::error::MultiHarpError;
 //#[link(name = "mhlib")]
 #[cfg(feature = "MHLib")]
 #[allow(non_snake_case, dead_code)]
-#[cfg_attr(windows, link(name = "mhlib64", kind = "dylib"))]
-#[cfg_attr(unix, link(name = "mhlib", kind = "dylib"))]
+#[cfg_attr(all(windows, not(feature = "nolink")), link(name = "mhlib64", kind = "dylib"))]
+#[cfg_attr(all(unix, not(feature = "nolink")), link(name = "mhlib", kind = "dylib"))]
 extern "C" {
     pub fn MH_GetLibraryVersion(vers : *mut c_char) -> c_int;
     pub fn MH_GetErrorString(errstring : *mut c_char, errcode : c_int) -> c_int;

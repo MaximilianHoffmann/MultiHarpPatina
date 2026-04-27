@@ -13,6 +13,7 @@ fn main() {
     let target = env::var("TARGET").unwrap();
 
     if target.contains("windows") {
+        #[cfg(not(feature = "nolink"))]
         println!("cargo:rustc-link-lib=mhlib64");
 
         #[cfg(all(feature="MHLib", not(feature="MHLv3_1_0")))]
@@ -22,6 +23,7 @@ fn main() {
         println!("cargo:rustc-link-search=native=c:\\Program Files\\PicoQuant\\MultiHarp-MHLibv31");
     }
     else {
+        #[cfg(not(feature = "nolink"))]
         println!("cargo:rustc-link-lib=mhlib64");
 
         println!("cargo:rustc-link-search=native=/usr/local/lib");
