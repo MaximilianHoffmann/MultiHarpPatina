@@ -45,6 +45,8 @@ impl Display for CheckedError {
     }
 }
 
+impl Error for CheckedError {}
+
 impl From <MultiHarpError> for CheckedError {
     fn from(e: MultiHarpError) -> Self {
         CheckedError::MultiHarpError(e)
